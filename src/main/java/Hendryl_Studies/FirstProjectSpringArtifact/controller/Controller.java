@@ -12,51 +12,28 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/*	Controller onde vai ficar concentrado os request para pegar e add dados
- P/ Indicar pro Spring que essa classe é um controller é só usar a notação RestController
- O EndPoint deste controller é pet, e quando chamarem esse endpoint pet com método get
- ele vai chamar o getall por conta do getMapping
-*/
+
 @RestController
 @RequiredArgsConstructor
-
-//Determina pela uri qual controller ira representar as requisições
-@RequestMapping("/pet") //Estou mapeando o request que vai cair aqui neste controller, todos os request para o endpoint pet
+@RequestMapping("/pet")
 public class Controller {
+
+//    @Autowired -- Ver se tem necessidade de usar
     private final PetsRepository repository;
-    @GetMapping // isso é pro spring entender que esse método é chamado qnd o endpoint for chamado com o get
-    //Assinatura do método***
+    @GetMapping
     public ResponseEntity<List<PetDTO>> getAllPet() {
+
         List<PetsEntity> petsEntityList = repository.findAll();
-        List<PetDTO> petDTOS = new ArrayList<>();
-
-        /* 5 formas de fazer a mesma coisa:
-        for (PetsEntity petsEntity : petsEntityList) {
-            petDTOS.add(new PetDTO(petsEntity));
-        }
-
-        for (int cont = 0; cont < petsEntityList.size(); cont ++) {
-            petDTOS.add(new PetDTO(petsEntityList.get(cont)));
-        }
-
-        petsEntityList.forEach(petsEntity -> {
-            petDTOS.add(new PetDTO(petsEntity));
-        });
 
         ResponseEntity.ok(petsEntityList.stream().map(PetDTO::new).toList());
-
-        petsEntityList.stream().forEach(PetDTO::new);
-        */
-
+//            return ResponseEntity;
         return ResponseEntity.ok(petsEntityList.stream().map(petsEntity -> new PetDTO(petsEntity)).toList());
+
+
     }
 
 }
-//P/Conseguir acessar o bd é criar a classe repository e a classe da entidade
-//classe repository é de interface que oferece métodos abstratos p/manipular e gerenciar os dados(CRUD - criar, ler, atualizar e deletar os dados do BD)
-//classe entidade é a que vai representar a tabela no bd, vai mapear todas as colunas que tem nas tabelas (ela vai representar uma tabela)
