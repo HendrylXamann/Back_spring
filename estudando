@@ -9,6 +9,9 @@ Controller:
 P/Conseguir acessar o bd é criar a classe repository e a classe da entidade
 classe repository é de interface que oferece métodos abstratos p/manipular e gerenciar os dados(CRUD - criar, ler, atualizar e deletar os dados do BD)
 classe entidade é a que vai representar a tabela no bd, vai mapear todas as colunas que tem nas tabelas (ela vai representar uma tabela)
+
+@RestController indica que a classe é um controlador REST
+@RequiredArgsConstructor - gera automaticamente um construtor que recebe todos os campos marcados como final
 @GetMapping --isso é pro spring entender que esse método é chamado qnd o endpoint for chamado com o get
 @RequestMapping -- Determina pela url qual controller irá representar as requisições, nele que criamos o endpoint
 para acessar o end point no bruno e testar: http://localhost:8080/pet
@@ -53,6 +56,7 @@ Entidade| Entity:
 // P/ falar pro spring que essa class indica uma tabela do banco usamos:
 @Table(name="itens") //Dentro passamos o nome da tabela
 @Entity(name = "itens")
+Para conseguir pegar os valores no DTO:
 @Getter //in real time gera um método get para todas as propriedades que a classe tem
 @Setter
 @AllArgsConstructor //declara um constructor que recebe todos os argumentos
@@ -69,4 +73,19 @@ public class PetsEntity {
     private Integer qtditem;
 
 
+}
+
+DTO:
+Data transfer object - privar alguns itens/dados de serem visualizados ou consultados?
+/* criamos um record/dto quando estamos implementando uma classe que não vai ter nenhum método, pois um record gera automaticamente
+um construtor com todos os métodos (getters, setters, equals(), hashCode(), ou toString()) para cada propridade da classe */
+
+public record PetDTO(Integer id, String nomeItem, Integer qtditem) { //aqui declaro quais propriedades a classe vai ter
+    public PetDTO(PetsEntity petEntity) {
+        this(
+                petEntity.getId(), o get só funciona pois lá na entidade setamos o getters
+                petEntity.getNomeitem(),
+                petEntity.getQtditem()
+        );
+    }
 }
