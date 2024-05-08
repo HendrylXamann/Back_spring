@@ -1,6 +1,4 @@
-package Hendryl_Studies.FirstProjectSpringArtifact.controller; //Tive que add o .controller no fim e mover para um package separado
-
-//import Hendryl_Studies.FirstProjectSpringArtifact.Pets.Pets;
+package Hendryl_Studies.FirstProjectSpringArtifact.controller;
 import Hendryl_Studies.FirstProjectSpringArtifact.Pets.PetDTOresponse;
 import Hendryl_Studies.FirstProjectSpringArtifact.Pets.PetDTOresquest;
 import Hendryl_Studies.FirstProjectSpringArtifact.Pets.PetsEntity;
@@ -10,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @RestController
 @RequiredArgsConstructor //Elimina necessidade de um Autowired

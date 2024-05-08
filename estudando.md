@@ -18,6 +18,17 @@ para acessar o end point no bruno e testar: http://localhost:8080/pet
 
 public class Controller {
     private final PetsRepository repository;
+    @CrossOrigin(origins = "*", allowedHeaders = "*") -- Permite todos os acessos (se quiser restringit o endpoint é aqui)
+    @PostMapping -- Definindo método
+    public void comentarioUsuario(@RequestBody PetDTOresquest data ){ -- requisição que permite 'publicar'
+    /*
+    Ele recebe um objeto PetDTOrequest como parâmetro, que é obtido do corpo da requisição HTTP usando a anotação @RequestBody.
+    Isso significa que o corpo da solicitação será convertido automaticamente em um objeto PetDTOrequest pelo Spring. */
+    PetsEntity petsData = new PetsEntity(data); -- cria uma nova instância da classe PetsEntity
+    repository.save(petsData); -- repository é uma instância de um repositório Spring Data JPA então save ta salvando no BD
+    return; -- por ser void o retorno é vazio
+    }
+
     @GetMapping
     Assinatura do método(seu nome, lista de parâmetros e o tipo de retorno, se houver):
     public ResponseEntity<List<PetDTO>> getAllPet() {
@@ -63,17 +74,22 @@ Para conseguir pegar os valores no DTO:
 @NoArgsConstructor //declara um constructor que não recebe nenhum argumento
 @EqualsAndHashCode(of = "id") //indicar que o id é a representação única dessa classe
 public class PetsEntity {
-    //Declaração de colunas dentro da tabela itens2:
+    //Declaração de colunas dentro da tabela itens:
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Definir a chave única como ID, colocar como autoincrement
     private Integer id;
     private String nomeitem;
-//    private String imagem;
     private String valoritem;
     private Integer qtditem;
+    private String descricao;
 
-
+    public PetsEntity(PetDTOresquest data){
+    this.nomeitem = data.nomeItem();
+    this.qtditem = data.qtditem();
+    this.descricao = data.descricao();
+    }
 }
+
 
 DTO:
 Data transfer object - privar alguns itens/dados de serem visualizados ou consultados?

@@ -16,9 +16,11 @@ public class PetsEntity {
     private String nomeitem;
     private String valoritem;
     private Integer qtditem;
+    private String descricao;
 
     public PetsEntity(PetDTOresquest data){
         this.nomeitem = data.nomeItem();
         this.qtditem = data.qtditem();
+        this.descricao = data.descricao();
     }
 }
