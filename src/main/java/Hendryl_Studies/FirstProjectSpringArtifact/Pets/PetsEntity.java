@@ -1,29 +1,26 @@
 package Hendryl_Studies.FirstProjectSpringArtifact.Pets;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-
-//P/ falar pro spring que essa class indica uma tabela do banco usamos:
-@Table(name="itens") //Dentro passamos o nome da tabela
+@Table(name="itens")
 @Entity(name = "itens")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class PetsEntity {
-    //Declaração de colunas dentro da tabela itens2:
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Definir a chave única como ID, colocar como autoincrement
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nomeitem;
-//    private String imagem;
-    private BigDecimal valoritem;
+    private String valoritem;
     private Integer qtditem;
+    private String descricao;
 
-
+    public PetsEntity(PetDTOresquest data){
+        this.nomeitem = data.nomeItem();
+        this.qtditem = data.qtditem();
+        this.descricao = data.descricao();
+    }
 }
