@@ -1,7 +1,7 @@
 # README - Projeto Spring Boot Simples
 
 ## Introdução
-Este é um simples projeto de aplicação Spring Boot, criado com o objetivo de me auxiliar no aprendizado da linguagem. 
+Este é um simples projeto de aplicação Spring Boot, criado com o objetivo de me auxiliar no aprendizado do framework. 
 O que estou abordando: 
 - Criação de um projeto Spring Boot
 - Configuração de dependências
@@ -12,9 +12,9 @@ O que estou abordando:
 ## Pré-requisitos
 Para executar este projeto, você precisará ter instalado em sua máquina:
 
-- JDK 11 ou superior
+- JDK 11 ou superior (usei o 17)
 - Maven
-- IDE Java (opcional)
+- IDE Java (Intelij recomendado)
 
 ## Instalação
 Clone este repositório:
